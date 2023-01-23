@@ -1,7 +1,7 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { getUserData } from "../store/actions/getUserAction";
-// import { getCourseData } from "@/store/actions/getCourseAction";
-// import { getMergedData } from "@/store/actions/getMergedDataAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "../store/actions/getUserAction";
+import { getCourseData } from "@/store/actions/getCourseAction";
+import { getMergedData } from "@/store/actions/getMergedDataAction";
 import { useState, useEffect } from "react";
 import {merge} from 'react-merge'
 import axios from "axios";
@@ -14,50 +14,53 @@ import {
   faArrowUp
 } from "@fortawesome/free-solid-svg-icons";
 
-const TableComponent = () => {
+const TableComponentCopy = () => {
 
     // NO REDUX
-    const [userdata, setUserData] = useState([]);
-    const [coursedata, setUserCourses] = useState([]);
-    const [mergeddata, setMergedData] = useState([]);
+    // const [userData, setUserData] = useState([]);
+    // const [userCourses, setUserCourses] = useState([]);
 
-    // get users data
-    useEffect(()=>{
-      axios.get(process.env.USERS_API_URL).then(response => {
-        // console.log(response.data);
-        setUserData(response.data);
-      });
+    // // get users data
+    // useEffect(()=>{
+    //   loadData();
+    // },[]);
 
-      axios.get(process.env.USERS_COURSES_API_URL).then(response => {
-        // console.log(response.data);
-        setUserCourses(response.data);
-      });
-    },[]);
+    // const loadData = () => {
+    //   axios.get(process.env.USERS_API_URL).then(response => {
+    //     console.log(response.data);
+    //       setUserData(response.data);
+    //   });
 
+    //   axios.get(process.env.USERS_COURSES_API_URL).then(response => {
+    //     console.log(response.data);
+    //     setUserCourses(response.data);
+    //   });
+    // }
 
-    // WITH REDUX
-    // const dispatch = useDispatch();
-    // const userListData = useSelector((state) => state.getUserData);
-    // const { userdata } = userListData;
-    // const courseListData = useSelector((state) => state.getCourseData);
-    // const { coursedata } = courseListData;
-    // const mergedListData = useSelector((state) => state.getMergedData);
-    // const { mergeddata } = mergedListData;
+    const dispatch = useDispatch();
+    const userListData = useSelector((state) => state.getUserData);
+    const { userdata } = userListData;
+    const courseListData = useSelector((state) => state.getCourseData);
+    const { coursedata } = courseListData;
+    const mergedListData = useSelector((state) => state.getMergedData);
+    const { mergeddata } = mergedListData;
 
-    const [_mergeddata, _setMergedData] = useState(false);
+    const [_mergeddata, setMergedData] = useState(false);
     const [isReady, setIsReady] = useState(false);
     const [isFiltered, setIsFiltered] = useState(false);
 
-    // // get user and course data
-    // useEffect(()=>{
-    //     axios.get(process.env.USERS_API_URL).then(response => {
-    //         dispatch(getUserData(response.data));
-    //     });
+    // get user and course data
+    useEffect(()=>{
+        // loadData();
+        axios.get(process.env.USERS_API_URL).then(response => {
+            dispatch(getUserData(response.data));
+        });
 
-    //     axios.get(process.env.USERS_COURSES_API_URL).then(response => {
-    //       dispatch(getCourseData(response.data));
-    //     });
-    // },[dispatch])
+        axios.get(process.env.USERS_COURSES_API_URL).then(response => {
+          dispatch(getCourseData(response.data));
+          // console.log(response.data);
+        });
+    },[dispatch])
     
 
     useEffect(()=>{
@@ -96,14 +99,26 @@ const TableComponent = () => {
           mainarray.push(obj);
         });
         setIsReady(true);
-        // dispatch(getMergedData(mainarray));
+        dispatch(getMergedData(mainarray));
         setMergedData(mainarray);
-        _setMergedData(mainarray);
       }
-    },[userdata, coursedata])
+    },[userdata, coursedata, dispatch])
 
 
-    //fuzzy search
+    // const loadData = () => {
+    //     axios.get(process.env.USERS_API_URL).then(response => {
+    //         dispatch(getUserData(response.data));
+    //     });
+
+    //     axios.get(process.env.USERS_COURSES_API_URL).then(response => {
+    //       dispatch(getCourseData(response.data));
+    //       console.log(response.data);
+    //     });
+    // }
+    //
+
+
+    //search data
     const searchQuery = (e) => {
         setIsFiltered(true);
         const searchoptions = {
@@ -127,7 +142,7 @@ const TableComponent = () => {
         const searchfuse = new Fuse(mergeddata, searchoptions);
         const searchresult = searchfuse.search(e);
         console.log(searchresult);
-        _setMergedData(searchresult);
+        setMergedData(searchresult);
     }
     //
     
@@ -297,4 +312,4 @@ const TableComponent = () => {
 
 }
 
-export default TableComponent;
+export default TableComponentCopy;

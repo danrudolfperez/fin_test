@@ -5,12 +5,18 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
-function App({ Component, pageProps }) {
+// function App({ Component, pageProps }) {
+//   return (
+//     <Provider store={store}>
+//       <Component {...pageProps} />
+//     </Provider>
+//   ) 
+// }
+
+// export default wrapper.withRedux(App);
+
+export default function App({ Component, pageProps }) {
   return (
-    <Provider store={store}>
       <Component {...pageProps} />
-    </Provider>
   ) 
 }
-
-export default wrapper.withRedux(App);
