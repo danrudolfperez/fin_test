@@ -51,7 +51,15 @@ const TableComponent = () => {
 
     // get user and course data
     useEffect(()=>{
-        loadData();
+        // loadData();
+        axios.get(process.env.USERS_API_URL).then(response => {
+            dispatch(getUserData(response.data));
+        });
+
+        axios.get(process.env.USERS_COURSES_API_URL).then(response => {
+          dispatch(getCourseData(response.data));
+          // console.log(response.data);
+        });
     },[dispatch])
     
 
@@ -94,19 +102,19 @@ const TableComponent = () => {
         dispatch(getMergedData(mainarray));
         setMergedData(mainarray);
       }
-    },[userdata, coursedata])
+    },[userdata, coursedata, dispatch])
 
 
-    const loadData = () => {
-        axios.get(process.env.USERS_API_URL).then(response => {
-            dispatch(getUserData(response.data));
-        });
+    // const loadData = () => {
+    //     axios.get(process.env.USERS_API_URL).then(response => {
+    //         dispatch(getUserData(response.data));
+    //     });
 
-        axios.get(process.env.USERS_COURSES_API_URL).then(response => {
-          dispatch(getCourseData(response.data));
-          console.log(response.data);
-        });
-    }
+    //     axios.get(process.env.USERS_COURSES_API_URL).then(response => {
+    //       dispatch(getCourseData(response.data));
+    //       console.log(response.data);
+    //     });
+    // }
     //
 
 
