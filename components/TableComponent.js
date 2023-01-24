@@ -126,7 +126,7 @@ const TableComponent = () => {
        
         const searchfuse = new Fuse(mergeddata, searchoptions);
         const searchresult = searchfuse.search(e);
-        console.log(searchresult);
+        // console.log(searchresult);
         _setMergedData(searchresult);
     }
     //
