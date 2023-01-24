@@ -120,7 +120,6 @@ const TableComponent = () => {
           // ignoreLocation: false,
           // ignoreFieldNorm: true,
           // fieldNormWeight: 1,
-          // keys: ["name","email","phone", "courses","course_name", "course_selection","semester"],
           keys: ["name","phone","email","courses.course_name","courses.course_selection","courses.semester","courses.semester_fee"]
         };
        
