@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     USERS_API_URL: process.env.USERS_API_URL,
     USERS_COURSES_API_URL: process.env.USERS_COURSES_API_URL,
