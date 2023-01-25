@@ -40,7 +40,6 @@ const TableComponent = () => {
 
       axios.get(process.env.USERS_COURSES_API_URL).then(response => {
         setUserCourses(response.data);
-        console.log(response.data);
         let feesArr = [];
         response.data.forEach(el => {
           feesArr.push(el.semester_fee);
