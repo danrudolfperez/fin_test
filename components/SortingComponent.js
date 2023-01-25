@@ -5,7 +5,7 @@ import { getMergedData } from "@/store/actions/getMergedDataAction";
 const SortingComponent = () => {
 
     const dispatch = useDispatch();
-    const { mergeddata } = useSelector((state) => state.getMergedData);
+    const { mergeddata, originalmergeddata } = useSelector((state) => state.getMergedData);
     const [sortBy, setSortBy] = useState('');
     const [sortOrder, setSortOrder] = useState('');
 
@@ -25,7 +25,7 @@ const SortingComponent = () => {
                 return 0;
             }
         });
-        dispatch(getMergedData(sortedData));
+        dispatch(getMergedData(sortedData, originalmergeddata));
     };
 
   return (
