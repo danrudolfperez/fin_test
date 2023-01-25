@@ -9,7 +9,7 @@ export const getCourseData = (data) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_COURSE_DATA_ERROR,
-      payload: "Error message",
+      payload: "No Data Found",
     });
   }
 };

@@ -2,7 +2,6 @@ import { GET_USER_DATA, GET_USER_DATA_ERROR } from "../types";
 
 const initialState = {
   userdata: [],
-  loading: true,
 };
 
 const getUserReducer = (state = initialState, action) => {
@@ -11,12 +10,10 @@ const getUserReducer = (state = initialState, action) => {
       return {
         ...state,
         userdata: action.payload,
-        loading: false,
       };
 
     case GET_USER_DATA_ERROR:
       return {
-        loading: false,
         error: action.payload,
       };
 
