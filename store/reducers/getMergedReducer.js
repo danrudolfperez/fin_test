@@ -2,7 +2,7 @@ import { GET_MERGED_DATA, GET_MERGED_DATA_ERROR } from "../types";
 
 const initialState = {
   mergeddata: [],
-  loading: true,
+  originalmergeddata: [],
 };
 
 const getMergedReducer = (state = initialState, action) => {
@@ -10,14 +10,13 @@ const getMergedReducer = (state = initialState, action) => {
     case GET_MERGED_DATA:
       return {
         ...state,
-        mergeddata: action.payload,
-        loading: false,
+        mergeddata: action.payload1,
+        originalmergeddata: action.payload2,
       };
 
     case GET_MERGED_DATA_ERROR:
       return {
-        loading: false,
-        error: action.payload,
+        error: action.payload1,
       };
 
     default:
